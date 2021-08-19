@@ -1,6 +1,13 @@
+import { Car } from "../model/Car";
+import { ICarsRepository } from "../repositories/ICarsRepository";
+
 class ListCarsService {
-  execute(): void {
-    console.log("TODO");
+  constructor(private carsRepository: ICarsRepository) {}
+
+  execute(): Car[] {
+    const cars = this.carsRepository.list();
+
+    return cars;
   }
 }
 

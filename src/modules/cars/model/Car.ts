@@ -5,15 +5,21 @@ class Car {
   name: string;
   brand: string;
   color: string;
-  model: string;
-  manufactureYear: string;
+  model: number;
+  manufactureYear: number;
+  category: string;
   mileage: number;
-  photoUrl: string;
+  photoUrl?: string;
+  dailyRate: number;
   unavailableDates: string[];
 
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
+    }
+
+    if (!this.unavailableDates) {
+      this.unavailableDates = [];
     }
   }
 }
