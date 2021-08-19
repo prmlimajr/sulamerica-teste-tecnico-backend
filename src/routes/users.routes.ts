@@ -1,4 +1,3 @@
-import { ListUsersService } from "@src/modules/users/services/ListUsersService";
 import { createUserSessionController } from "@src/modules/users/useCases/createUserSession";
 import { listUsersController } from "@src/modules/users/useCases/listUsers";
 import { Router } from "express";

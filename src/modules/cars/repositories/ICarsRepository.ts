@@ -33,6 +33,7 @@ interface ICarsRepository {
   }: ICreateCarDTO): void;
   list(): Car[];
   book(id: string, dates: string[]): void;
+  uploadPhoto(id: string, file: File): void;
 }
 
 export { ICarsRepository, ICreateCarDTO, IListCarsDTO };

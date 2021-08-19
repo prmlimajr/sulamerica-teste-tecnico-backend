@@ -60,6 +60,12 @@ class CarsRepository implements ICarsRepository {
 
     car.unavailableDates.push(...dates);
   }
+
+  uploadPhoto(id: string, file: File): void {
+    const car = this.cars.find((car) => car.id === id);
+
+    car.photoUrl = file.name;
+  }
 }
 
 export { CarsRepository };
