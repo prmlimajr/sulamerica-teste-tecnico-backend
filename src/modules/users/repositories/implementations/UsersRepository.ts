@@ -1,11 +1,20 @@
-import { User } from "../model/User";
-import { ICreateUserDTO, IUsersRepository } from "./IUsersRepository";
+import { User } from "../../model/User";
+import { ICreateUserDTO, IUsersRepository } from "../IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
   private users: User[];
+  private static INSTANCE: UsersRepository;
 
-  constructor() {
+  private constructor() {
     this.users = [];
+  }
+
+  public static getInstance(): UsersRepository {
+    if (!UsersRepository.INSTANCE) {
+      UsersRepository.INSTANCE = new UsersRepository();
+    }
+
+    return UsersRepository.INSTANCE;
   }
 
   create({ name, email }: ICreateUserDTO): void {
@@ -25,7 +34,7 @@ class UsersRepository implements IUsersRepository {
     Object.assign(user, { name });
   }
 
-  list() {
+  list(): User[] {
     return this.users;
   }
 

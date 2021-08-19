@@ -1,12 +1,22 @@
-import { Car } from "../model/Car";
-import { ICarsRepository, ICreateCarDTO } from "./ICarsRepository";
+import { Car } from "../../model/Car";
+import { ICarsRepository, ICreateCarDTO } from "../ICarsRepository";
 
 class CarsRepository implements ICarsRepository {
   private cars: Car[];
+  private static INSTANCE: CarsRepository;
 
-  constructor() {
+  private constructor() {
     this.cars = [];
   }
+
+  public static getInstance(): CarsRepository {
+    if (!CarsRepository.INSTANCE) {
+      CarsRepository.INSTANCE = new CarsRepository();
+    }
+
+    return CarsRepository.INSTANCE;
+  }
+
   create({
     name,
     brand,

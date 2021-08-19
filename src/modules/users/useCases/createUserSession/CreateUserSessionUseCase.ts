@@ -1,6 +1,6 @@
 import { sign } from "jsonwebtoken";
 
-import { IUsersRepository } from "../repositories/IUsersRepository";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
   name: string;
@@ -15,7 +15,7 @@ interface IResponse {
   token: string;
 }
 
-class CreateUserSessionService {
+class CreateUserSessionUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ name, email }: IRequest): IResponse {
@@ -40,4 +40,4 @@ class CreateUserSessionService {
   }
 }
 
-export { CreateUserSessionService };
+export { CreateUserSessionUseCase };

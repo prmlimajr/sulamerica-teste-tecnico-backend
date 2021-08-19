@@ -1,43 +1,15 @@
-import { CarsRepository } from "@src/modules/cars/repositories/CarsRepository";
-import { CreateCarService } from "@src/modules/cars/services/CreateCarService";
-import { ListCarsService } from "@src/modules/cars/services/ListCarsService";
+import { createCarController } from "@src/modules/cars/useCases/createCar";
+import { listCarsController } from "@src/modules/cars/useCases/listCars";
 import { Router } from "express";
 
 const carsRoutes = Router();
-const carsRepository = new CarsRepository();
 
-carsRoutes.post("/", (req, res) => {
-  const {
-    name,
-    brand,
-    color,
-    dailyRate,
-    manufactureYear,
-    model,
-    category,
-    mileage,
-  } = req.body;
-
-  const createCarService = new CreateCarService(carsRepository);
-
-  createCarService.execute({
-    name,
-    brand,
-    color,
-    dailyRate,
-    manufactureYear,
-    model,
-    category,
-    mileage,
-  });
-
-  return res.status(200).send();
+carsRoutes.post("/", (request, response) => {
+  return createCarController.handle(request, response);
 });
 
-carsRoutes.get("/", (req, res) => {
-  const cars = new ListCarsService(carsRepository).execute();
-
-  return res.status(200).json(cars);
+carsRoutes.get("/", (request, response) => {
+  return listCarsController.handle(request, response);
 });
 
 export { carsRoutes };
