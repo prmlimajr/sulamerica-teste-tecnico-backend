@@ -1,5 +1,4 @@
-import { User } from "@src/model/User";
-
+import { User } from "../model/User";
 import { ICreateUserDTO } from "./IUsersRepository";
 
 class UsersRepository {
@@ -18,6 +17,16 @@ class UsersRepository {
     });
 
     this.users.push(user);
+  }
+
+  update(id: string, name: string): void {
+    const user = this.users.find((user) => user.id === id);
+
+    Object.assign(user, { name });
+  }
+
+  list() {
+    return this.users;
   }
 
   findByEmail(email: string): User {
