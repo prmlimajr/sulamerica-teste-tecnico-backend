@@ -1,6 +1,7 @@
 import { CarModel } from "@src/database/schemas/cars";
 import { UserModel } from "@src/database/schemas/users";
 import { User } from "@src/modules/users/model/User";
+import { AppError } from "@src/shared/errors/AppError";
 
 import { Car } from "../../model/Car";
 import { ICreateCarDTO } from "../dtos/ICreateCarDTO";
@@ -52,7 +53,7 @@ class CarsRepository implements ICarsRepository {
     );
 
     if (carIsUnavailable) {
-      throw new Error("Car is unavailable.");
+      throw new AppError("Car is unavailable.");
     }
 
     // verificar se usuário já tem algum carro alugado nesse período
@@ -61,7 +62,7 @@ class CarsRepository implements ICarsRepository {
     });
 
     if (userAlreadyBookedSomeCar) {
-      throw new Error("User already booked a car in this date");
+      throw new AppError("User already booked a car in this date");
     }
 
     const [userAlreadyBookedThisCar] = user.carsRented.filter(
@@ -73,11 +74,11 @@ class CarsRepository implements ICarsRepository {
       : false;
 
     if (userAlreadyBookedThisCarOnThisDate) {
-      throw new Error("You already booked this car.");
+      throw new AppError("You already booked this car.");
     }
 
     if (dates.length > 30) {
-      throw new Error("Can't book a car for over 30 days.");
+      throw new AppError("Can't book a car for over 30 days.");
     }
 
     const updatedDatesInCar = [...car.unavailableDates, ...dates];
@@ -106,7 +107,7 @@ class CarsRepository implements ICarsRepository {
   }
 
   uploadPhoto(id: string, file: File): void {
-    throw new Error("Method not implemented.");
+    throw new AppError("Method not implemented.");
   }
 }
 

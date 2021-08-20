@@ -1,4 +1,5 @@
 import { UserModel } from "@src/database/schemas/users";
+import { AppError } from "@src/shared/errors/AppError";
 import { sign } from "jsonwebtoken";
 
 import { User } from "../../model/User";
@@ -12,7 +13,7 @@ export interface ISession {
 
 class UsersRepository implements IUsersRepository {
   findByEmail(email: string): User {
-    throw new Error("Method not implemented.");
+    throw new AppError("Method not implemented.");
   }
 
   async findById(id: string): Promise<User> {
@@ -55,7 +56,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   update(id: any, name: any): void {
-    throw new Error("Method not implemented.");
+    throw new AppError("Method not implemented.");
   }
 
   async list(): Promise<User[]> {
