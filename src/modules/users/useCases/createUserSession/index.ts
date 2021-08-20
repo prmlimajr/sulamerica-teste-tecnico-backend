@@ -1,9 +1,7 @@
-import { UsersRepository } from "../../repositories/implementations/UsersRepository";
 import { CreateUserSessionController } from "./CreateUserSessionController";
 import { CreateUserSessionUseCase } from "./CreateUserSessionUseCase";
 
-const usersRepository = UsersRepository.getInstance();
-const createUserSessionUseCase = new CreateUserSessionUseCase(usersRepository);
+const createUserSessionUseCase = new CreateUserSessionUseCase();
 const createUserSessionController = new CreateUserSessionController(
   createUserSessionUseCase
 );
