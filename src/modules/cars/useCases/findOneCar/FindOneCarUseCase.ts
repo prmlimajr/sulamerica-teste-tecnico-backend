@@ -1,14 +1,14 @@
 import { Car } from "../../model/Car";
 import { CarsRepository } from "../../repositories/implementations/CarsRepository";
 
-class ListCarsUseCase {
-  async execute(): Promise<Car[]> {
+class FindOneCarUseCase {
+  async execute(id: string): Promise<Car> {
     const carsRepository = new CarsRepository();
 
-    const cars = await carsRepository.listAll();
+    const car = await carsRepository.findOne(id);
 
-    return cars;
+    return car;
   }
 }
 
-export { ListCarsUseCase };
+export { FindOneCarUseCase };

@@ -1,24 +1,5 @@
 import { Car } from "../model/Car";
-
-interface ICreateCarDTO {
-  name: string;
-  brand: string;
-  color: string;
-  dailyRate: number;
-  manufactureYear: number;
-  model: number;
-  category: string;
-  mileage: string;
-}
-
-interface IListCarsDTO {
-  name?: string;
-  brand?: string;
-  minDailyRate?: number;
-  maxDailyRate?: number;
-  minManufactureYear?: number;
-  maxManufactureYear?: number;
-}
+import { ICreateCarDTO } from "./dtos/ICreateCarDTO";
 
 interface ICarsRepository {
   create({
@@ -30,10 +11,11 @@ interface ICarsRepository {
     model,
     category,
     mileage,
-  }: ICreateCarDTO): void;
-  list(): Car[];
+  }: ICreateCarDTO): Promise<void>;
+  listAll(): Promise<Car[]>;
+  findOne(id: string): Promise<Car>;
   book(id: string, dates: string[]): void;
   uploadPhoto(id: string, file: File): void;
 }
 
-export { ICarsRepository, ICreateCarDTO, IListCarsDTO };
+export { ICarsRepository };

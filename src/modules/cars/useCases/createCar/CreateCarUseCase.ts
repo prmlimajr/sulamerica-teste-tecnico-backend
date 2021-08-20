@@ -1,5 +1,7 @@
 import { CarModel } from "@src/database/schemas/cars";
 
+import { CarsRepository } from "../../repositories/implementations/CarsRepository";
+
 interface IRequest {
   name: string;
   brand: string;
@@ -22,7 +24,9 @@ class CreateCarUseCase {
     category,
     mileage,
   }: IRequest): Promise<void> {
-    const car = new CarModel({
+    const carsRepository = new CarsRepository();
+
+    await carsRepository.create({
       name,
       brand,
       color,
@@ -32,8 +36,6 @@ class CreateCarUseCase {
       category,
       mileage,
     });
-
-    await car.save();
   }
 }
 

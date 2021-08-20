@@ -1,10 +1,11 @@
-import { UserModel } from "@src/database/schemas/users";
-
 import { User } from "../../model/User";
+import { UsersRepository } from "../../repositories/implementations/UsersRepository";
 
 class ListUsersUseCase {
   async execute(): Promise<User[]> {
-    const users = await UserModel.find().exec();
+    const usersRepository = new UsersRepository();
+
+    const users = await usersRepository.list();
 
     return users;
   }

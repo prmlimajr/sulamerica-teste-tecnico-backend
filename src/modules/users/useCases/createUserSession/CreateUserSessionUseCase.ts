@@ -1,5 +1,4 @@
-import { UserModel } from "@src/database/schemas/users";
-import { sign } from "jsonwebtoken";
+import { UsersRepository } from "../../repositories/implementations/UsersRepository";
 
 interface IRequest {
   name: string;
@@ -16,31 +15,11 @@ interface IResponse {
 
 class CreateUserSessionUseCase {
   async execute({ name, email }: IRequest): Promise<IResponse> {
-    let user = await UserModel.findOne({ email });
+    const usersRepository = new UsersRepository();
 
-    if (user && user.name !== name) {
-      await UserModel.findOneAndUpdate({ email }, { name }, { new: true });
-    }
+    const session = await usersRepository.createSession({ name, email });
 
-    if (!user) {
-      const newUser = new UserModel({
-        name,
-        email,
-      });
-
-      await newUser.save();
-    }
-
-    user = await UserModel.findOne({ email });
-
-    const token = sign({}, "183ec22b3b4ce338172fb80fc289bcaa", {
-      expiresIn: "1d",
-    });
-
-    return {
-      user,
-      token,
-    };
+    return session;
   }
 }
 

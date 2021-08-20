@@ -1,15 +1,13 @@
 import { User } from "../model/User";
-
-interface ICreateUserDTO {
-  name: string;
-  email: string;
-}
+import { ICreateUserDTO } from "./dtos/ICreateUserDTO";
+import { ISession } from "./implementations/UsersRepository";
 
 interface IUsersRepository {
   findByEmail(email: string): User;
-  create({ name, email }: ICreateUserDTO): void;
+  findById(id: string): Promise<User>;
+  createSession({ name, email }: ICreateUserDTO): Promise<ISession>;
   update(id, name): void;
-  list(): User[];
+  list(): Promise<User[]>;
 }
 
-export { IUsersRepository, ICreateUserDTO };
+export { IUsersRepository };
