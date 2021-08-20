@@ -1,4 +1,4 @@
-import { ICarsRepository } from "../../repositories/ICarsRepository";
+import { CarModel } from "@src/database/schemas/cars";
 
 interface IRequest {
   name: string;
@@ -12,9 +12,7 @@ interface IRequest {
 }
 
 class CreateCarUseCase {
-  constructor(private carsRepository: ICarsRepository) {}
-
-  execute({
+  async execute({
     name,
     brand,
     color,
@@ -23,8 +21,8 @@ class CreateCarUseCase {
     model,
     category,
     mileage,
-  }: IRequest): void {
-    this.carsRepository.create({
+  }: IRequest): Promise<void> {
+    const car = new CarModel({
       name,
       brand,
       color,
@@ -34,6 +32,8 @@ class CreateCarUseCase {
       category,
       mileage,
     });
+
+    await car.save();
   }
 }
 

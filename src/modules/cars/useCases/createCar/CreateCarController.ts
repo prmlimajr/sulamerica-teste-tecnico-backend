@@ -5,7 +5,7 @@ import { CreateCarUseCase } from "./CreateCarUseCase";
 class CreateCarController {
   constructor(private createCarUseCase: CreateCarUseCase) {}
 
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const {
       name,
       brand,
@@ -17,7 +17,7 @@ class CreateCarController {
       mileage,
     } = request.body;
 
-    this.createCarUseCase.execute({
+    const car = await this.createCarUseCase.execute({
       name,
       brand,
       color,
@@ -28,7 +28,7 @@ class CreateCarController {
       mileage,
     });
 
-    return response.status(200).send();
+    return response.status(200).json(car);
   }
 }
 

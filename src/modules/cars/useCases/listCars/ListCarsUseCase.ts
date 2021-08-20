@@ -1,11 +1,12 @@
+import { CarModel } from "@src/database/schemas/cars";
+
 import { Car } from "../../model/Car";
-import { ICarsRepository } from "../../repositories/ICarsRepository";
 
 class ListCarsUseCase {
-  constructor(private carsRepository: ICarsRepository) {}
+  async execute(): Promise<Car[]> {
+    const cars = await CarModel.find().exec();
 
-  execute(): Car[] {
-    return this.carsRepository.list();
+    return cars;
   }
 }
 

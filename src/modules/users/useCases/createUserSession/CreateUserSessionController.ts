@@ -5,10 +5,10 @@ import { CreateUserSessionUseCase } from "./CreateUserSessionUseCase";
 class CreateUserSessionController {
   constructor(private createUserSessionUseCase: CreateUserSessionUseCase) {}
 
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { name, email } = request.body;
 
-    const token = this.createUserSessionUseCase.execute({ name, email });
+    const token = await this.createUserSessionUseCase.execute({ name, email });
 
     return response.status(201).json(token);
   }
