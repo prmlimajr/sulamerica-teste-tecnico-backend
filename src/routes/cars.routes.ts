@@ -1,3 +1,4 @@
+import { bookCarController } from "@src/modules/cars/useCases/bookCar";
 import { createCarController } from "@src/modules/cars/useCases/createCar";
 import { findOneCarController } from "@src/modules/cars/useCases/findOneCar";
 import { listCarsController } from "@src/modules/cars/useCases/listCars";
@@ -19,6 +20,10 @@ carsRoutes.get("/", (request, response) => {
 
 carsRoutes.get("/:id", (request, response) => {
   return findOneCarController.handle(request, response);
+});
+
+carsRoutes.post("/book/:id", (request, response) => {
+  return bookCarController.handle(request, response);
 });
 
 carsRoutes.post("/photo", upload.single("file"), (request, response) => {

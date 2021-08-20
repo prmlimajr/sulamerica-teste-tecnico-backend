@@ -13,8 +13,8 @@ interface ICarsRepository {
     mileage,
   }: ICreateCarDTO): Promise<void>;
   listAll(): Promise<Car[]>;
-  findOne(id: string): Promise<Car>;
-  book(id: string, dates: string[]): void;
+  findOne(id: string): Promise<Car[]>;
+  book(carId: string, userId: string, dates: string[]): void;
   uploadPhoto(id: string, file: File): void;
 }
 

@@ -26,7 +26,7 @@ const carsSchema = new Schema<ICar>({
   mileage: { type: Number, required: true },
   photoUrl: { type: String },
   dailyRate: { type: Number, required: true },
-  unavailableDates: { type: [Date], required: true },
+  unavailableDates: { type: [String], required: true },
 });
 
 const CarModel = model<ICar>("Car", carsSchema);

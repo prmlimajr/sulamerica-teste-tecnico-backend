@@ -1,5 +1,3 @@
-import { CarModel } from "@src/database/schemas/cars";
-
 import { CarsRepository } from "../../repositories/implementations/CarsRepository";
 
 interface IRequest {
