@@ -1,5 +1,3 @@
-import { User } from "@src/modules/users/model/User";
-
 import { CarsRepository } from "../../repositories/implementations/CarsRepository";
 
 class BookCarUseCase {

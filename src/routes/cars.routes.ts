@@ -1,35 +1,34 @@
-import { bookCarController } from "@src/modules/cars/useCases/bookCar";
-import { createCarController } from "@src/modules/cars/useCases/createCar";
-import { findOneCarController } from "@src/modules/cars/useCases/findOneCar";
-import { listCarsController } from "@src/modules/cars/useCases/listCars";
+import { BookCarController } from "@src/modules/cars/useCases/bookCar/BookCarController";
+import { CreateCarController } from "@src/modules/cars/useCases/createCar/CreateCarController";
+import { FindOneCarController } from "@src/modules/cars/useCases/findOneCar/FindOneCarController";
+import { ListCarsController } from "@src/modules/cars/useCases/listCars/ListCarsController";
+import { UploadCarPhotoController } from "@src/modules/cars/useCases/uploadCarPhoto/UploadCarPhotoController";
 import { Router } from "express";
 import multer from "multer";
 
+import uploadConfig from "../config/upload";
+
 const carsRoutes = Router();
-const upload = multer({
-  dest: "./tmp",
-});
+const createCarController = new CreateCarController();
+const listCarsController = new ListCarsController();
+const findOneCarController = new FindOneCarController();
+const bookCarController = new BookCarController();
+const uploadCarPhotoController = new UploadCarPhotoController();
 
-carsRoutes.post("/", (request, response) => {
-  return createCarController.handle(request, response);
-});
+const upload = multer(uploadConfig.upload("./tmp"));
 
-carsRoutes.get("/", (request, response) => {
-  return listCarsController.handle(request, response);
-});
+carsRoutes.post("/", createCarController.handle);
 
-carsRoutes.get("/:id", (request, response) => {
-  return findOneCarController.handle(request, response);
-});
+carsRoutes.get("/", listCarsController.handle);
 
-carsRoutes.post("/book/:id", (request, response) => {
-  return bookCarController.handle(request, response);
-});
+carsRoutes.get("/:id", findOneCarController.handle);
 
-carsRoutes.post("/photo", upload.single("file"), (request, response) => {
-  const { file } = request;
-  console.log(file);
-  return response.send();
-});
+carsRoutes.post("/book/:id", bookCarController.handle);
+
+carsRoutes.patch(
+  "/photo/:id",
+  upload.single("file"),
+  uploadCarPhotoController.handle
+);
 
 export { carsRoutes };

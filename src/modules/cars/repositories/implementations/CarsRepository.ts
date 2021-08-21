@@ -1,6 +1,5 @@
 import { CarModel } from "@src/database/schemas/cars";
 import { UserModel } from "@src/database/schemas/users";
-import { User } from "@src/modules/users/model/User";
 import { AppError } from "@src/shared/errors/AppError";
 
 import { Car } from "../../model/Car";
@@ -40,7 +39,7 @@ class CarsRepository implements ICarsRepository {
 
   async findOne(id: string): Promise<Car[]> {
     const car = await CarModel.find({ id }).exec();
-
+    console.log(id, car);
     return car;
   }
 
@@ -65,18 +64,6 @@ class CarsRepository implements ICarsRepository {
       throw new AppError("User already booked a car in this date");
     }
 
-    const [userAlreadyBookedThisCar] = user.carsRented.filter(
-      (rented) => rented.car.id === carId
-    );
-
-    const userAlreadyBookedThisCarOnThisDate = userAlreadyBookedThisCar
-      ? userAlreadyBookedThisCar.dates.some((date) => dates.includes(date))
-      : false;
-
-    if (userAlreadyBookedThisCarOnThisDate) {
-      throw new AppError("You already booked this car.");
-    }
-
     if (dates.length > 30) {
       throw new AppError("Can't book a car for over 30 days.");
     }
@@ -89,15 +76,21 @@ class CarsRepository implements ICarsRepository {
       { new: true }
     ).exec();
 
+    function updateList() {
+      const carAlreadyRentedBefore = user.carsRented.map((rent) => {
+        if (rent.car.id === carId) {
+          rent.dates = [...rent.dates, ...dates];
+        }
+        return rent;
+      });
+
+      return carAlreadyRentedBefore.some((rented) => rented.car.id === carId)
+        ? carAlreadyRentedBefore
+        : [...user.carsRented, { car, dates }];
+    }
+
     const updatedUserCarsRented =
-      user.carsRented.length > 0
-        ? user.carsRented.map((rent) => {
-            if (rent.car.id === carId) {
-              rent.dates = [...rent.dates, ...dates];
-            }
-            return rent;
-          })
-        : [{ car, dates }];
+      user.carsRented.length > 0 ? updateList() : [{ car, dates }];
 
     await UserModel.findOneAndUpdate(
       { id: userId },
@@ -106,8 +99,12 @@ class CarsRepository implements ICarsRepository {
     ).exec();
   }
 
-  uploadPhoto(id: string, file: File): void {
-    throw new AppError("Method not implemented.");
+  async uploadPhoto(car: Car): Promise<void> {
+    await CarModel.findOneAndUpdate(
+      { id: car.id },
+      { photoUrl: car.photoUrl },
+      { new: true }
+    ).exec();
   }
 }
 

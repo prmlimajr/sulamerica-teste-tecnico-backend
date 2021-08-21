@@ -36,6 +36,8 @@ export async function ensureAuthenticated(
 
     request.user = {
       id,
+      name: user.name,
+      email: user.email,
     };
 
     next();

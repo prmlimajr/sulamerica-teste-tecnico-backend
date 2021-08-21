@@ -1,15 +1,13 @@
-import { createUserSessionController } from "@src/modules/users/useCases/createUserSession";
-import { listUsersController } from "@src/modules/users/useCases/listUsers";
+import { CreateUserSessionController } from "@src/modules/users/useCases/createUserSession/CreateUserSessionController";
+import { ListUsersController } from "@src/modules/users/useCases/listUsers/ListUsersController";
 import { Router } from "express";
 
 const usersRoutes = Router();
+const createUserSessionController = new CreateUserSessionController();
+const listUsersController = new ListUsersController();
 
-usersRoutes.post("/register", (request, response) => {
-  return createUserSessionController.handle(request, response);
-});
+usersRoutes.post("/register", createUserSessionController.handle);
 
-usersRoutes.get("/", (request, response) => {
-  return listUsersController.handle(request, response);
-});
+usersRoutes.get("/", listUsersController.handle);
 
 export { usersRoutes };

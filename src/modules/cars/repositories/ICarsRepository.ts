@@ -14,8 +14,8 @@ interface ICarsRepository {
   }: ICreateCarDTO): Promise<void>;
   listAll(): Promise<Car[]>;
   findOne(id: string): Promise<Car[]>;
-  book(carId: string, userId: string, dates: string[]): void;
-  uploadPhoto(id: string, file: File): void;
+  book(carId: string, userId: string, dates: string[]): Promise<void>;
+  uploadPhoto(car: Car): Promise<void>;
 }
 
 export { ICarsRepository };
