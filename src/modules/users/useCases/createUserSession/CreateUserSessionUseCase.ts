@@ -24,6 +24,16 @@ class CreateUserSessionUseCase {
   ) {}
 
   async execute({ name, email }: IRequest): Promise<IResponse> {
+    const user = await this.usersRepository.findByEmail(email);
+
+    if (user && user.name !== name) {
+      await this.usersRepository.update(user.id, name);
+    }
+
+    if (!user) {
+      await this.usersRepository.createUser({ name, email });
+    }
+
     const session = await this.usersRepository.createSession({ name, email });
 
     return session;

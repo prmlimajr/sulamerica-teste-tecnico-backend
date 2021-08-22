@@ -1,7 +1,7 @@
 import { IUsersRepository } from "@src/modules/users/repositories/IUsersRepository";
-import { AppError } from "@src/shared/errors/AppError";
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../../../shared/errors/AppError";
 import { ICarsRepository } from "../../repositories/ICarsRepository";
 
 @injectable()
@@ -27,6 +27,7 @@ class BookCarUseCase {
     }
 
     // verificar se usuário já tem algum carro alugado nesse período
+    user.carsRented = user.carsRented || [];
     const [userAlreadyBookedSomeCar] = user.carsRented.filter((rented) => {
       return rented.dates.some((date) => dates.includes(date));
     });

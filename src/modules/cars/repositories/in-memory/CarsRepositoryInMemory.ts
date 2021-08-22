@@ -51,7 +51,7 @@ class CarsRepositoryInMemory implements ICarsRepository {
     carId: string,
     updatedDatesInCar: string[],
     userId: string,
-    updatedUserCarsRented: ICarsRentedByUser
+    updatedUserCarsRented: ICarsRentedByUser[]
   ): Promise<void> {
     this.cars.map((element) => {
       if (element.id === carId) {

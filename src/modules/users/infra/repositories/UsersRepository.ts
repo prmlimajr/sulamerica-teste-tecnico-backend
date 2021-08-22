@@ -12,8 +12,10 @@ export interface ISession {
 }
 
 class UsersRepository implements IUsersRepository {
-  findByEmail(email: string): User {
-    throw new AppError("Method not implemented.");
+  async findByEmail(email: string): Promise<User> {
+    const user = await UserModel.findOne({ email });
+
+    return user;
   }
 
   async findById(id: string): Promise<User> {
@@ -22,23 +24,19 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
+  async createUser({ name, email }: ICreateUserDTO): Promise<User> {
+    const newUser = new UserModel({
+      name,
+      email,
+    });
+
+    await newUser.save();
+
+    return newUser;
+  }
+
   async createSession({ name, email }: ICreateUserDTO): Promise<ISession> {
-    let user = await UserModel.findOne({ email });
-
-    if (user && user.name !== name) {
-      await UserModel.findOneAndUpdate({ email }, { name }, { new: true });
-    }
-
-    if (!user) {
-      const newUser = new UserModel({
-        name,
-        email,
-      });
-
-      await newUser.save();
-    }
-
-    user = await UserModel.findOne({ email });
+    const user = await this.findByEmail(email);
 
     const token = sign(
       { id: user.id, name, email },
@@ -55,8 +53,8 @@ class UsersRepository implements IUsersRepository {
     };
   }
 
-  update(id: any, name: any): void {
-    throw new AppError("Method not implemented.");
+  async update(id: string, name: string): Promise<void> {
+    await UserModel.findOneAndUpdate({ id }, { name }, { new: true });
   }
 
   async list(): Promise<User[]> {

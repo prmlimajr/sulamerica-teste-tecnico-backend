@@ -1,6 +1,5 @@
 import { inject, injectable } from "tsyringe";
 
-import { CarsRepository } from "../../infra/repositories/CarsRepository";
 import { ICarsRepository } from "../../repositories/ICarsRepository";
 
 interface IRequest {
