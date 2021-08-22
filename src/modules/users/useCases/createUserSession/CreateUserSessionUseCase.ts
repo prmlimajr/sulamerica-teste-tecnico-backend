@@ -1,5 +1,8 @@
+import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
+import * as yup from "yup";
 
+import { AppError } from "../../../../shared/errors/AppError";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
@@ -24,7 +27,16 @@ class CreateUserSessionUseCase {
   ) {}
 
   async execute({ name, email }: IRequest): Promise<IResponse> {
-    const user = await this.usersRepository.findByEmail(email);
+    const schema = yup.object().shape({
+      name: yup.string().required().min(3),
+      email: yup.string().email().required(),
+    });
+
+    if (!(await schema.isValid({ name, email }))) {
+      throw new AppError("Validation error");
+    }
+
+    let user = await this.usersRepository.findByEmail(email);
 
     if (user && user.name !== name) {
       await this.usersRepository.update(user.id, name);
@@ -34,9 +46,21 @@ class CreateUserSessionUseCase {
       await this.usersRepository.createUser({ name, email });
     }
 
-    const session = await this.usersRepository.createSession({ name, email });
+    user = await this.usersRepository.findByEmail(email);
 
-    return session;
+    const token = sign(
+      { id: user.id, name, email },
+      "183ec22b3b4ce338172fb80fc289bcaa",
+      {
+        subject: user.id,
+        expiresIn: "1d",
+      }
+    );
+
+    return {
+      user,
+      token,
+    };
   }
 }
 
