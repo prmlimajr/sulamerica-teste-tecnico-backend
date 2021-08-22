@@ -1,0 +1,163 @@
+import { v4 as uuidV4 } from "uuid";
+
+import { aventador } from "./carsPhotos/aventador";
+import { bmw } from "./carsPhotos/bmw";
+import { cayenne } from "./carsPhotos/cayenne";
+import { civic } from "./carsPhotos/civic";
+import { compass } from "./carsPhotos/compass";
+import { corolla } from "./carsPhotos/corolla";
+import { creta } from "./carsPhotos/creta";
+import { hb20 } from "./carsPhotos/hb20";
+import { ka } from "./carsPhotos/ka";
+import { mobi } from "./carsPhotos/mobi";
+import { speciale } from "./carsPhotos/speciale";
+import { tracker } from "./carsPhotos/tracker";
+
+const seeds = [
+  {
+    id: uuidV4(),
+    name: "Corolla",
+    brand: "Toyota",
+    color: "Prata",
+    dailyRate: 129.9,
+    manufactureYear: 2017,
+    model: 2017,
+    category: "Sedan",
+    mileage: 39000,
+    photoUrl: corolla,
+  },
+  {
+    id: uuidV4(),
+    name: "F458 Speciale",
+    brand: "Ferrari",
+    color: "Vermelha",
+    dailyRate: 899.9,
+    manufactureYear: 2021,
+    model: 2021,
+    category: "Luxo",
+    mileage: 1000,
+    photoUrl: speciale,
+  },
+  {
+    id: uuidV4(),
+    name: "Aventador",
+    brand: "Lamborghini",
+    color: "Verde",
+    dailyRate: 899.9,
+    manufactureYear: 2021,
+    model: 2021,
+    category: "Luxo",
+    mileage: 1000,
+    photoUrl: aventador,
+  },
+  {
+    id: uuidV4(),
+    name: "Cayenne",
+    brand: "Porsche",
+    color: "Branca",
+    dailyRate: 499.9,
+    manufactureYear: 2017,
+    model: 2017,
+    category: "Luxo",
+    mileage: 41000,
+    photoUrl: cayenne,
+  },
+  {
+    id: uuidV4(),
+    name: "320i",
+    brand: "BMW",
+    color: "Branca",
+    dailyRate: 299.9,
+    manufactureYear: 2018,
+    model: 2018,
+    category: "Sedan",
+    mileage: 33000,
+    photoUrl: bmw,
+  },
+  {
+    id: uuidV4(),
+    name: "Ka",
+    brand: "Ford",
+    color: "Branca",
+    dailyRate: 49.9,
+    manufactureYear: 2018,
+    model: 2018,
+    category: "Hatch",
+    mileage: 78000,
+    photoUrl: ka,
+  },
+  {
+    id: uuidV4(),
+    name: "HB20",
+    brand: "Hiunday",
+    color: "Prata",
+    dailyRate: 49.9,
+    manufactureYear: 2021,
+    model: 2021,
+    category: "Hatch",
+    mileage: 7000,
+    photoUrl: hb20,
+  },
+  {
+    id: uuidV4(),
+    name: "Mobi",
+    brand: "Fiat",
+    color: "Preto",
+    dailyRate: 39.9,
+    manufactureYear: 2019,
+    model: 2019,
+    category: "Hatch",
+    mileage: 57000,
+    photoUrl: mobi,
+  },
+  {
+    id: uuidV4(),
+    name: "Civic",
+    brand: "Honda",
+    color: "Prata",
+    dailyRate: 99.9,
+    manufactureYear: 2020,
+    model: 2020,
+    category: "Sedan",
+    mileage: 27000,
+    photoUrl: civic,
+  },
+  {
+    id: uuidV4(),
+    name: "Tracker",
+    brand: "Chevrolet",
+    color: "Branca",
+    dailyRate: 89.9,
+    manufactureYear: 2020,
+    model: 2020,
+    category: "SUV",
+    mileage: 27000,
+    photoUrl: tracker,
+  },
+  {
+    id: uuidV4(),
+    name: "Compass",
+    brand: "Jeep",
+    color: "Preta",
+    dailyRate: 109.9,
+    manufactureYear: 2021,
+    model: 2021,
+    category: "SUV",
+    mileage: 2000,
+    photoUrl: compass,
+  },
+  {
+    id: uuidV4(),
+    name: "Creta",
+    brand: "Hiunday",
+    color: "Preta",
+    dailyRate: 89.9,
+    manufactureYear: 2021,
+    model: 2021,
+    category: "SUV",
+    mileage: 8000,
+    photoUrl: creta,
+  },
+];
+
+export { seeds };
