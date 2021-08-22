@@ -1,19 +1,26 @@
-import { CarsRepository } from "../../repositories/implementations/CarsRepository";
+import { inject, injectable } from "tsyringe";
+
+import { CarsRepository } from "../../infra/repositories/CarsRepository";
+import { ICarsRepository } from "../../repositories/ICarsRepository";
 
 interface IRequest {
   id: string;
   filename: string;
 }
 
+@injectable()
 class UploadCarPhotoUseCase {
-  async execute({ id, filename }: IRequest): Promise<void> {
-    const carsRepository = new CarsRepository();
+  constructor(
+    @inject("CarsRepository")
+    private carsRepository: ICarsRepository
+  ) {}
 
-    const [car] = await carsRepository.findOne(id);
+  async execute({ id, filename }: IRequest): Promise<void> {
+    const [car] = await this.carsRepository.findOne(id);
 
     car.photoUrl = `http://127.0.0.1:8080/files/${filename}`;
 
-    await carsRepository.uploadPhoto(car);
+    await this.carsRepository.uploadPhoto(car);
   }
 }
 

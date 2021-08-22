@@ -1,4 +1,4 @@
-import { Car } from "@src/modules/cars/model/Car";
+import { Car } from "@src/modules/cars/infra/model/Car";
 import { model, Schema } from "mongoose";
 import { v4 as uuid } from "uuid";
 

@@ -1,12 +1,14 @@
-import { CarModel } from "@src/database/schemas/cars";
-import { UserModel } from "@src/database/schemas/users";
+import { User } from "@src/modules/users/infra/model/User";
 import { AppError } from "@src/shared/errors/AppError";
 
-import { Car } from "../../model/Car";
-import { ICreateCarDTO } from "../dtos/ICreateCarDTO";
+import { ICreateCarDTO } from "../../dtos/ICreateCarDTO";
+import { Car } from "../../infra/model/Car";
 import { ICarsRepository } from "../ICarsRepository";
 
-class CarsRepository implements ICarsRepository {
+class CarsRepositoryInMemory implements ICarsRepository {
+  cars: Car[] = [];
+  users: User[] = [];
+
   async create({
     name,
     brand,
@@ -17,7 +19,9 @@ class CarsRepository implements ICarsRepository {
     category,
     mileage,
   }: ICreateCarDTO): Promise<void> {
-    const car = new CarModel({
+    const car = new Car();
+
+    Object.assign(car, {
       name,
       brand,
       color,
@@ -28,24 +32,22 @@ class CarsRepository implements ICarsRepository {
       mileage,
     });
 
-    await car.save();
+    this.cars.push(car);
   }
 
   async listAll(): Promise<Car[]> {
-    const cars = await CarModel.find().exec();
-
-    return cars;
+    return this.cars;
   }
 
   async findOne(id: string): Promise<Car[]> {
-    const car = await CarModel.find({ id }).exec();
-    console.log(id, car);
+    const car = this.cars.filter((car) => car.id === id);
+
     return car;
   }
 
   async book(carId: string, userId: string, dates: string[]): Promise<void> {
-    const [car] = await CarModel.find({ id: carId }).exec();
-    const [user] = await UserModel.find({ id: userId }).exec();
+    const [car] = this.cars.filter((car) => car.id === carId);
+    const [user] = this.users.filter((user) => user.id === userId);
 
     const carIsUnavailable = car.unavailableDates.some((date) =>
       dates.includes(date)
@@ -70,11 +72,15 @@ class CarsRepository implements ICarsRepository {
 
     const updatedDatesInCar = [...car.unavailableDates, ...dates];
 
-    await CarModel.findOneAndUpdate(
-      { id: carId },
-      { unavailableDates: updatedDatesInCar },
-      { new: true }
-    ).exec();
+    this.cars.map((element) => {
+      if (element.id === carId) {
+        element = Object.assign(element, {
+          unavailableDates: updatedDatesInCar,
+        });
+      }
+
+      return element;
+    });
 
     function updateList() {
       const carAlreadyRentedBefore = user.carsRented.map((rent) => {
@@ -92,20 +98,26 @@ class CarsRepository implements ICarsRepository {
     const updatedUserCarsRented =
       user.carsRented.length > 0 ? updateList() : [{ car, dates }];
 
-    await UserModel.findOneAndUpdate(
-      { id: userId },
-      { carsRented: updatedUserCarsRented },
-      { new: true }
-    ).exec();
+    this.users.map((element) => {
+      if (element.id === userId) {
+        element = Object.assign(element, {
+          carsRented: updatedUserCarsRented,
+        });
+      }
+
+      return element;
+    });
   }
 
   async uploadPhoto(car: Car): Promise<void> {
-    await CarModel.findOneAndUpdate(
-      { id: car.id },
-      { photoUrl: car.photoUrl },
-      { new: true }
-    ).exec();
+    this.cars.map((element) => {
+      if (element.id === car.id) {
+        element = car;
+      }
+
+      return element;
+    });
   }
 }
 
-export { CarsRepository };
+export { CarsRepositoryInMemory };

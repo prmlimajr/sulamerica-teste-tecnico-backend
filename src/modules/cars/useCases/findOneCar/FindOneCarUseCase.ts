@@ -1,11 +1,17 @@
-import { Car } from "../../model/Car";
-import { CarsRepository } from "../../repositories/implementations/CarsRepository";
+import { inject, injectable } from "tsyringe";
 
+import { Car } from "../../infra/model/Car";
+import { ICarsRepository } from "../../repositories/ICarsRepository";
+
+@injectable()
 class FindOneCarUseCase {
-  async execute(id: string): Promise<Car> {
-    const carsRepository = new CarsRepository();
+  constructor(
+    @inject("CarsRepository")
+    private carsRepository: ICarsRepository
+  ) {}
 
-    const car = await carsRepository.findOne(id);
+  async execute(id: string): Promise<Car[]> {
+    const car = await this.carsRepository.findOne(id);
 
     return car;
   }

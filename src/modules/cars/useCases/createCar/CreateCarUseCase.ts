@@ -1,4 +1,6 @@
-import { CarsRepository } from "../../repositories/implementations/CarsRepository";
+import { inject, injectable } from "tsyringe";
+
+import { ICarsRepository } from "../../repositories/ICarsRepository";
 
 interface IRequest {
   name: string;
@@ -11,7 +13,13 @@ interface IRequest {
   mileage: string;
 }
 
+@injectable()
 class CreateCarUseCase {
+  constructor(
+    @inject("CarsRepository")
+    private carsRepository: ICarsRepository
+  ) {}
+
   async execute({
     name,
     brand,
@@ -22,9 +30,7 @@ class CreateCarUseCase {
     category,
     mileage,
   }: IRequest): Promise<void> {
-    const carsRepository = new CarsRepository();
-
-    await carsRepository.create({
+    await this.carsRepository.create({
       name,
       brand,
       color,

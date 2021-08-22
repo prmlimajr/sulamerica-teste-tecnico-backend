@@ -1,4 +1,4 @@
-import { Car } from "@src/modules/cars/model/Car";
+import { Car } from "@src/modules/cars/infra/model/Car";
 import { v4 as uuidV4 } from "uuid";
 
 class User {

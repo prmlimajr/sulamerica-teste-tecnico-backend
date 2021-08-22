@@ -1,4 +1,6 @@
-import { UsersRepository } from "../../repositories/implementations/UsersRepository";
+import { inject, injectable } from "tsyringe";
+
+import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 interface IRequest {
   name: string;
@@ -13,11 +15,15 @@ interface IResponse {
   token: string;
 }
 
+@injectable()
 class CreateUserSessionUseCase {
-  async execute({ name, email }: IRequest): Promise<IResponse> {
-    const usersRepository = new UsersRepository();
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: IUsersRepository
+  ) {}
 
-    const session = await usersRepository.createSession({ name, email });
+  async execute({ name, email }: IRequest): Promise<IResponse> {
+    const session = await this.usersRepository.createSession({ name, email });
 
     return session;
   }

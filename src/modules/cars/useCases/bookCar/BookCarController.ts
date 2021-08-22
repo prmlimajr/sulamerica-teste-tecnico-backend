@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { BookCarUseCase } from "./BookCarUseCase";
 
@@ -8,7 +9,7 @@ class BookCarController {
     const { id: userId } = request.user;
     const { dates } = request.body;
 
-    const bookCarUseCase = new BookCarUseCase();
+    const bookCarUseCase = container.resolve(BookCarUseCase);
 
     await bookCarUseCase.execute(carId, userId, dates);
 

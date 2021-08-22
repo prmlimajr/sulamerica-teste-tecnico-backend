@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { UploadCarPhotoUseCase } from "./UploadCarPhotoUseCase";
 
@@ -7,7 +8,7 @@ class UploadCarPhotoController {
     const { id } = request.params;
     const { filename } = request.file;
 
-    const uploadCarPhotoUseCase = new UploadCarPhotoUseCase();
+    const uploadCarPhotoUseCase = container.resolve(UploadCarPhotoUseCase);
 
     await uploadCarPhotoUseCase.execute({ id, filename });
 

@@ -1,10 +1,10 @@
-import { UserModel } from "@src/database/schemas/users";
 import { AppError } from "@src/shared/errors/AppError";
+import { UserModel } from "@src/shared/infra/database/schemas/users";
 import { sign } from "jsonwebtoken";
 
-import { User } from "../../model/User";
-import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
-import { IUsersRepository } from "../IUsersRepository";
+import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { User } from "../model/User";
 
 export interface ISession {
   user: User;

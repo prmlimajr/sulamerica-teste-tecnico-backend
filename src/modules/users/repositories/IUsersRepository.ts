@@ -1,6 +1,6 @@
-import { User } from "../model/User";
-import { ICreateUserDTO } from "./dtos/ICreateUserDTO";
-import { ISession } from "./implementations/UsersRepository";
+import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
+import { User } from "../infra/model/User";
+import { ISession } from "../infra/repositories/UsersRepository";
 
 interface IUsersRepository {
   findByEmail(email: string): User;

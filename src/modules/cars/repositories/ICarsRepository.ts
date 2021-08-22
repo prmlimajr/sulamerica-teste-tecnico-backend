@@ -1,5 +1,5 @@
-import { Car } from "../model/Car";
-import { ICreateCarDTO } from "./dtos/ICreateCarDTO";
+import { ICreateCarDTO } from "../dtos/ICreateCarDTO";
+import { Car } from "../infra/model/Car";
 
 interface ICarsRepository {
   create({

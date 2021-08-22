@@ -1,4 +1,4 @@
-import { UsersRepository } from "@src/modules/users/repositories/implementations/UsersRepository";
+import { UsersRepository } from "@src/modules/users/infra/repositories/UsersRepository";
 import { AppError } from "@src/shared/errors/AppError";
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";

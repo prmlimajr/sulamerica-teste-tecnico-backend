@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 
 import { CreateCarUseCase } from "./CreateCarUseCase";
 
@@ -15,7 +16,7 @@ class CreateCarController {
       mileage,
     } = request.body;
 
-    const createCarUseCase = new CreateCarUseCase();
+    const createCarUseCase = container.resolve(CreateCarUseCase);
 
     const car = await createCarUseCase.execute({
       name,

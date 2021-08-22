@@ -6,7 +6,7 @@ import { UploadCarPhotoController } from "@src/modules/cars/useCases/uploadCarPh
 import { Router } from "express";
 import multer from "multer";
 
-import uploadConfig from "../config/upload";
+import uploadConfig from "../../../../config/upload";
 
 const carsRoutes = Router();
 const createCarController = new CreateCarController();

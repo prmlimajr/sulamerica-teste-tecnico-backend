@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 import * as yup from "yup";
 
 import { CreateUserSessionUseCase } from "./CreateUserSessionUseCase";
@@ -7,7 +8,9 @@ class CreateUserSessionController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { name, email } = request.body;
 
-    const createUserSessionUseCase = new CreateUserSessionUseCase();
+    const createUserSessionUseCase = container.resolve(
+      CreateUserSessionUseCase
+    );
 
     const schema = yup.object().shape({
       name: yup.string().required().min(3),

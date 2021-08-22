@@ -1,11 +1,17 @@
-import { User } from "../../model/User";
-import { UsersRepository } from "../../repositories/implementations/UsersRepository";
+import { inject, injectable } from "tsyringe";
 
+import { User } from "../../infra/model/User";
+import { IUsersRepository } from "../../repositories/IUsersRepository";
+
+@injectable()
 class ListUsersUseCase {
-  async execute(): Promise<User[]> {
-    const usersRepository = new UsersRepository();
+  constructor(
+    @inject("UsersRepository")
+    private usersRepository: IUsersRepository
+  ) {}
 
-    const users = await usersRepository.list();
+  async execute(): Promise<User[]> {
+    const users = await this.usersRepository.list();
 
     return users;
   }
