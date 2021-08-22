@@ -9,6 +9,7 @@ interface IRequest {
 
 interface IResponse {
   user: {
+    id?: string;
     name: string;
     email: string;
   };

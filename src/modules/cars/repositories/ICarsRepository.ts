@@ -1,6 +1,11 @@
 import { ICreateCarDTO } from "../dtos/ICreateCarDTO";
 import { Car } from "../infra/model/Car";
 
+interface ICarsRentedByUser {
+  car: Car;
+  dates: string[];
+}
+
 interface ICarsRepository {
   create({
     name,
@@ -11,11 +16,17 @@ interface ICarsRepository {
     model,
     category,
     mileage,
-  }: ICreateCarDTO): Promise<void>;
+    unavailableDates,
+  }: ICreateCarDTO): Promise<Car[]>;
   listAll(): Promise<Car[]>;
   findOne(id: string): Promise<Car[]>;
-  book(carId: string, userId: string, dates: string[]): Promise<void>;
+  book(
+    carId: string,
+    updatedDatesInCar: string[],
+    userId: string,
+    updatedUserCarsRented: ICarsRentedByUser[]
+  ): Promise<void>;
   uploadPhoto(car: Car): Promise<void>;
 }
 
-export { ICarsRepository };
+export { ICarsRepository, ICarsRentedByUser };

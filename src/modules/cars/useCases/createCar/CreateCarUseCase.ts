@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { Car } from "../../infra/model/Car";
 import { ICarsRepository } from "../../repositories/ICarsRepository";
 
 interface IRequest {
@@ -11,6 +12,7 @@ interface IRequest {
   model: number;
   category: string;
   mileage: string;
+  unavailableDates?: string[];
 }
 
 @injectable()
@@ -29,8 +31,9 @@ class CreateCarUseCase {
     model,
     category,
     mileage,
-  }: IRequest): Promise<void> {
-    await this.carsRepository.create({
+    unavailableDates = [],
+  }: IRequest): Promise<Car[]> {
+    const car = await this.carsRepository.create({
       name,
       brand,
       color,
@@ -39,7 +42,10 @@ class CreateCarUseCase {
       model,
       category,
       mileage,
+      unavailableDates,
     });
+
+    return car;
   }
 }
 

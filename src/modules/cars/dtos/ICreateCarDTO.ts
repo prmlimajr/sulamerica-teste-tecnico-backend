@@ -7,6 +7,7 @@ interface ICreateCarDTO {
   model: number;
   category: string;
   mileage: string;
+  unavailableDates?: string[];
 }
 
 export { ICreateCarDTO };

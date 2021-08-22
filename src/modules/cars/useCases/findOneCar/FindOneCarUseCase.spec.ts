@@ -1,16 +1,19 @@
 import { CarsRepositoryInMemory } from "../../repositories/in-memory/CarsRepositoryInMemory";
-import { CreateCarUseCase } from "./CreateCarUseCase";
+import { CreateCarUseCase } from "../createCar/CreateCarUseCase";
+import { FindOneCarUseCase } from "./FindOneCarUseCase";
 
+let findOneCarUseCase: FindOneCarUseCase;
 let createCarUseCase: CreateCarUseCase;
 let carsRepositoryInMemory: CarsRepositoryInMemory;
 
-describe("Create a car", () => {
+describe("Find a car by id", () => {
   beforeEach(() => {
     carsRepositoryInMemory = new CarsRepositoryInMemory();
+    findOneCarUseCase = new FindOneCarUseCase(carsRepositoryInMemory);
     createCarUseCase = new CreateCarUseCase(carsRepositoryInMemory);
   });
 
-  it("should be able to create a car", async () => {
+  it("should be able to find a car by id", async () => {
     const car = {
       name: "Fusca",
       brand: "VolksWagen",
@@ -22,7 +25,7 @@ describe("Create a car", () => {
       mileage: "100000",
     };
 
-    await createCarUseCase.execute({
+    const [createdCar] = await createCarUseCase.execute({
       name: car.name,
       brand: car.brand,
       color: car.color,
@@ -33,6 +36,8 @@ describe("Create a car", () => {
       mileage: car.mileage,
     });
 
-    expect(carsRepositoryInMemory.cars.length).toBe(1);
+    const [foundCar] = await findOneCarUseCase.execute(createdCar.id);
+
+    expect(foundCar).toEqual(createdCar);
   });
 });
