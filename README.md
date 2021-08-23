@@ -89,5 +89,14 @@
   docker-compose up
  </code>
  
+ <h2>✔️ Testes</h2>
+ <p>Foram implementados testes unitários no projeto com o Jest para garantir o correto funcionamento dos casos.</p>
+ 
+ <p>Para executá-los, rodar no terminal o seguinte comando:</p>
+ 
+ <code>
+    yarn test
+ </code>
+ 
  <h2>😯 Autor</h2>
 <a href="https://www.linkedin.com/in/prmlimajr/">Paulo Lima</a>
