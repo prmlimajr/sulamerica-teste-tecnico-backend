@@ -1,6 +1,7 @@
-import { CreateUserSessionController } from "@src/modules/users/useCases/createUserSession/CreateUserSessionController";
-import { ListUsersController } from "@src/modules/users/useCases/listUsers/ListUsersController";
 import { Router } from "express";
+
+import { CreateUserSessionController } from "../../../../modules/users/useCases/createUserSession/CreateUserSessionController";
+import { ListUsersController } from "../../../../modules/users/useCases/listUsers/ListUsersController";
 
 const usersRoutes = Router();
 const createUserSessionController = new CreateUserSessionController();

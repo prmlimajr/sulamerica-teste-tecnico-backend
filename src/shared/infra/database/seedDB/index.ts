@@ -3,7 +3,9 @@ import { MongoClient } from "mongodb";
 import { seeds } from "./seeds";
 
 async function seedDB() {
-  const uri = "mongodb://mongo:27017/test";
+  const uri = `mongodb://mongo:27017/${
+    process.env.NODE_ENV === "test" ? "test" : "prod"
+  }`;
 
   const client = new MongoClient(uri, {
     useNewUrlParser: true,
@@ -14,7 +16,9 @@ async function seedDB() {
     await client.connect();
     console.log("Connected correctly to server");
 
-    const carsCollection = await client.db("test").collection("cars");
+    const carsCollection = await client
+      .db(`${process.env.NODE_ENV === "test" ? "test" : "prod"}`)
+      .collection("cars");
 
     carsCollection.drop();
 

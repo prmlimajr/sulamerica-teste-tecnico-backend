@@ -1,7 +1,7 @@
-import { IUsersRepository } from "@src/modules/users/repositories/IUsersRepository";
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../../../shared/errors/AppError";
+import { IUsersRepository } from "../../../users/repositories/IUsersRepository";
 import { ICarsRepository } from "../../repositories/ICarsRepository";
 
 @injectable()

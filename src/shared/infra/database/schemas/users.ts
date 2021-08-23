@@ -1,6 +1,7 @@
-import { Car } from "@src/modules/cars/infra/model/Car";
 import { model, Schema } from "mongoose";
 import { v4 as uuid } from "uuid";
+
+import { Car } from "../../../../modules/cars/infra/model/Car";
 
 interface IUser {
   id: string;

@@ -39,6 +39,6 @@
   },
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn --poll src/shared/infra/http/server.ts",
-    "test": "jest"
+    "test": "SET NODE_ENV=test&&jest"
   }
 }

@@ -1,5 +1,6 @@
-import { Car } from "@src/modules/cars/infra/model/Car";
 import { v4 as uuidV4 } from "uuid";
+
+import { Car } from "../../../cars/infra/model/Car";
 
 class User {
   id?: string;

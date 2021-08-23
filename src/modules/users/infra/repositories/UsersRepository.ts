@@ -1,5 +1,4 @@
-import { UserModel } from "@src/shared/infra/database/schemas/users";
-
+import { UserModel } from "../../../../shared/infra/database/schemas/users";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { User } from "../model/User";

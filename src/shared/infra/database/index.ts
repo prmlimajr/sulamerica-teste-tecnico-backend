@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://mongo:27017/test", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  `mongodb://mongo:27017/${process.env.NODE_ENV === "test" ? "test" : "prod"}`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const mongodb = mongoose.connection;
 

@@ -1,8 +1,9 @@
-import { BookCarController } from "@src/modules/cars/useCases/bookCar/BookCarController";
-import { CreateCarController } from "@src/modules/cars/useCases/createCar/CreateCarController";
-import { FindOneCarController } from "@src/modules/cars/useCases/findOneCar/FindOneCarController";
-import { ListCarsController } from "@src/modules/cars/useCases/listCars/ListCarsController";
 import { Router } from "express";
+
+import { BookCarController } from "../../../../modules/cars/useCases/bookCar/BookCarController";
+import { CreateCarController } from "../../../../modules/cars/useCases/createCar/CreateCarController";
+import { FindOneCarController } from "../../../../modules/cars/useCases/findOneCar/FindOneCarController";
+import { ListCarsController } from "../../../../modules/cars/useCases/listCars/ListCarsController";
 
 const carsRoutes = Router();
 const createCarController = new CreateCarController();

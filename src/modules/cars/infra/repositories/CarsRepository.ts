@@ -1,6 +1,5 @@
-import { CarModel } from "@src/shared/infra/database/schemas/cars";
-import { UserModel } from "@src/shared/infra/database/schemas/users";
-
+import { CarModel } from "../../../../shared/infra/database/schemas/cars";
+import { UserModel } from "../../../../shared/infra/database/schemas/users";
 import { ICreateCarDTO } from "../../dtos/ICreateCarDTO";
 import {
   ICarsRentedByUser,
