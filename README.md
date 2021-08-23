@@ -12,7 +12,7 @@ Esta API foi desenvolvida como parte do teste técnico solicitado pela SulAméri
       <a href='https://nodejs.org/en/'>NodeJS</a>
     </li>
     <li>
-      <a href='https://expressjs.com/>Express</a>
+      <a href='https://expressjs.com/'>Express</a>
     </li>
     <li>
       <a href='https://www.mongodb.com/pt-br'>MongoDB</a>
@@ -21,7 +21,7 @@ Esta API foi desenvolvida como parte do teste técnico solicitado pela SulAméri
       <a href='https://mongoosejs.com/'>Mongoose ODM</a>
     </li>
     <li>
-      <a href='https://jestjs.io/pt-BR/>Jest</a>
+      <a href='https://jestjs.io/pt-BR/'>Jest</a>
     </li>
     <li>
       <a href='https://www.docker.com/'>Docker</a>
