@@ -1,6 +1,6 @@
 # API de reserva de veículos
 
-## 💻 Sobre o projeto<
+## 💻 Sobre o projeto
 Esta API foi desenvolvida como parte do teste técnico solicitado pela SulAmérica. Trata-se de um sistema de cadastro e reservas de veículos.
 
 ## 🛠 Ferramentas utilizadas
