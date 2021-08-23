@@ -8,6 +8,7 @@ interface ICreateCarDTO {
   category: string;
   mileage: string;
   unavailableDates?: string[];
+  photoUrl: string;
 }
 
 export { ICreateCarDTO };

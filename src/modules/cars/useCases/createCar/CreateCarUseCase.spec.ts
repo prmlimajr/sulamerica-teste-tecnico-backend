@@ -20,6 +20,7 @@ describe("Create a car", () => {
       model: 1968,
       category: "Hatch",
       mileage: "100000",
+      photoUrl: "teste",
     };
 
     await createCarUseCase.execute({
@@ -31,6 +32,7 @@ describe("Create a car", () => {
       model: car.model,
       category: car.category,
       mileage: car.mileage,
+      photoUrl: car.photoUrl,
     });
 
     expect(carsRepositoryInMemory.cars.length).toBe(1);

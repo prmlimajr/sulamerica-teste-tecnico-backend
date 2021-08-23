@@ -17,6 +17,7 @@ interface ICarsRepository {
     category,
     mileage,
     unavailableDates,
+    photoUrl,
   }: ICreateCarDTO): Promise<Car[]>;
   listAll(): Promise<Car[]>;
   findOne(id: string): Promise<Car[]>;

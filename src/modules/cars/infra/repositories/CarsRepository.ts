@@ -18,6 +18,7 @@ class CarsRepository implements ICarsRepository {
     category,
     mileage,
     unavailableDates,
+    photoUrl,
   }: ICreateCarDTO): Promise<Car[]> {
     const car = new CarModel({
       name,
@@ -29,6 +30,7 @@ class CarsRepository implements ICarsRepository {
       category,
       mileage,
       unavailableDates,
+      photoUrl,
     });
 
     await car.save();

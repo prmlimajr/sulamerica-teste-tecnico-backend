@@ -15,6 +15,7 @@ class CreateCarController {
       category,
       mileage,
       unavailableDates,
+      photoUrl,
     } = request.body;
 
     const createCarUseCase = container.resolve(CreateCarUseCase);
@@ -29,6 +30,7 @@ class CreateCarController {
       category,
       mileage,
       unavailableDates,
+      photoUrl,
     });
 
     return response.status(200).json(car);

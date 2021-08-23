@@ -23,6 +23,7 @@ describe("List all cars", () => {
       model: 1968,
       category: "Hatch",
       mileage: "100000",
+      photoUrl: "teste",
     };
 
     await createCarUseCase.execute({
@@ -34,6 +35,7 @@ describe("List all cars", () => {
       model: car1.model,
       category: car1.category,
       mileage: car1.mileage,
+      photoUrl: car1.photoUrl,
     });
 
     const car2 = {
@@ -45,6 +47,7 @@ describe("List all cars", () => {
       model: 1972,
       category: "Sedan",
       mileage: "100000",
+      photoUrl: "teste",
     };
 
     await createCarUseCase.execute({
@@ -56,6 +59,7 @@ describe("List all cars", () => {
       model: car2.model,
       category: car2.category,
       mileage: car2.mileage,
+      photoUrl: car2.photoUrl,
     });
 
     const cars = await listCarsUseCase.execute();

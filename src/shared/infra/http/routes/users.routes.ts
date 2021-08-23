@@ -7,7 +7,7 @@ const usersRoutes = Router();
 const createUserSessionController = new CreateUserSessionController();
 const listUsersController = new ListUsersController();
 
-usersRoutes.post("/register", createUserSessionController.handle);
+usersRoutes.post("/signin", createUserSessionController.handle);
 
 usersRoutes.get("/", listUsersController.handle);
 

@@ -18,6 +18,10 @@ class BookCarUseCase {
     const [car] = await this.carsRepository.findOne(carId);
     const user = await this.usersRepository.findById(userId);
 
+    if (!car) {
+      throw new AppError("Car not found");
+    }
+
     const carIsUnavailable = car.unavailableDates.some((date) =>
       dates.includes(date)
     );

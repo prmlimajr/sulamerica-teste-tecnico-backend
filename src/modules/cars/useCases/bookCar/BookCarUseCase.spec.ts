@@ -40,6 +40,7 @@ describe("Book a car", () => {
         category: "Hatch",
         mileage: "100000",
         unavailableDates: ["2021-08-22"],
+        photoUrl: "teste",
       };
 
       const [createdCar] = await createCarUseCase.execute({
@@ -52,6 +53,7 @@ describe("Book a car", () => {
         category: car.category,
         mileage: car.mileage,
         unavailableDates: car.unavailableDates,
+        photoUrl: car.photoUrl,
       });
 
       const user = {
@@ -82,6 +84,7 @@ describe("Book a car", () => {
         category: "Hatch",
         mileage: "100000",
         unavailableDates: [],
+        photoUrl: "teste",
       };
 
       const [createdCar] = await createCarUseCase.execute({
@@ -94,6 +97,7 @@ describe("Book a car", () => {
         category: car.category,
         mileage: car.mileage,
         unavailableDates: car.unavailableDates,
+        photoUrl: car.photoUrl,
       });
 
       const user = {
@@ -128,6 +132,7 @@ describe("Book a car", () => {
         category: "Hatch",
         mileage: "100000",
         unavailableDates: [],
+        photoUrl: "teste",
       };
 
       const [createdCar] = await createCarUseCase.execute({
@@ -140,6 +145,7 @@ describe("Book a car", () => {
         category: car.category,
         mileage: car.mileage,
         unavailableDates: car.unavailableDates,
+        photoUrl: car.photoUrl,
       });
 
       const user = {
@@ -199,6 +205,7 @@ describe("Book a car", () => {
       category: "Hatch",
       mileage: "100000",
       unavailableDates: [],
+      photoUrl: "teste",
     };
 
     const [createdCar] = await createCarUseCase.execute({
@@ -211,6 +218,7 @@ describe("Book a car", () => {
       category: mockCar.category,
       mileage: mockCar.mileage,
       unavailableDates: mockCar.unavailableDates,
+      photoUrl: mockCar.photoUrl,
     });
 
     const user = {

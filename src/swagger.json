@@ -1,0 +1,426 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de teste para a SulAmerica",
+    "description": "API de reserva de veículos desenvolvida como teste técnico para a SulAmerica.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "pmonteij@everis.com"
+    }
+  },
+  "paths": {
+    "/cars": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Cadastra um novo veículo",
+        "description": "Cadastra um novo veículo",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "brand": {
+                    "type": "string"
+                  },
+                  "color": {
+                    "type": "string"
+                  },
+                  "dailyRate": {
+                    "type": "number"
+                  },
+                  "manufactureYear": {
+                    "type": "number"
+                  },
+                  "model": {
+                    "type": "number"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "mileage": {
+                    "type": "number"
+                  },
+                  "photoUrl": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Uno",
+                  "brand": "Fiat",
+                  "color": "Azul",
+                  "dailyRate": 10.00,
+                  "manufactureYear": 2010,
+                  "model": 2010,
+                  "category": "Hatch",
+                  "mileage": 10000,
+                  "photoUrl": "Imagem em base64"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta de sucesso"
+          },
+          "400": {
+            "description": "Resposta de erro"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Lista todos os veículos cadastrados",
+        "description": "Lista todos os veículos cadastrados",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta de sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "brand": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "dailyRate": {
+                        "type": "number"
+                      },
+                      "manufactureYear": {
+                        "type": "number"
+                      },
+                      "model": {
+                        "type": "number"
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "mileage": {
+                        "type": "number"
+                      },
+                      "photoUrl": {
+                        "type": "string"
+                      },
+                      "unavailableDates": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }        
+      }
+    },
+    "/cars/{id}": {
+      "get": {
+        "tags": ["Cars"],
+        "summary": "Busca um veículo pelo id",
+        "description": "Busca um veículo pelo id",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do veículo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resposta de sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "brand": {
+                        "type": "string"
+                      },
+                      "color": {
+                        "type": "string"
+                      },
+                      "dailyRate": {
+                        "type": "number"
+                      },
+                      "manufactureYear": {
+                        "type": "number"
+                      },
+                      "model": {
+                        "type": "number"
+                      },
+                      "category": {
+                        "type": "string"
+                      },
+                      "mileage": {
+                        "type": "number"
+                      },
+                      "photoUrl": {
+                        "type": "string"
+                      },
+                      "unavailableDates": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "format": "date",
+                          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/book/{id}": {
+      "post": {
+        "tags": ["Cars"],
+        "summary": "Reserva um veículo",
+        "description": "Reserva um veículo",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do veículo",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dates": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "date",
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Resposta de sucesso"
+          },
+          "400": {
+            "description": "Resposta de erro"
+          }
+        }
+      }
+    },
+    "/user/signin": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Autentica um usuário",
+        "description": "Autentica um usuário",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "João",
+                  "email": "joao@example.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Resposta de sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Resposta de erro"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Lista todos os usuários",
+        "description": "Lista todos os usuários",
+        "responses": {
+          "200": {
+            "description": "Resposta de sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "carsRented": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "car": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "brand": {
+                                  "type": "string"
+                                },
+                                "color": {
+                                  "type": "string"
+                                },
+                                "dailyRate": {
+                                  "type": "number"
+                                },
+                                "manufactureYear": {
+                                  "type": "number"
+                                },
+                                "model": {
+                                  "type": "number"
+                                },
+                                "category": {
+                                  "type": "string"
+                                },
+                                "mileage": {
+                                  "type": "number"
+                                },
+                                "photoUrl": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "dates": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "format": "date",
+                                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
