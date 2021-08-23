@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 import * as yup from "yup";
@@ -48,14 +50,10 @@ class CreateUserSessionUseCase {
 
     user = await this.usersRepository.findByEmail(email);
 
-    const token = sign(
-      { id: user.id, name, email },
-      "183ec22b3b4ce338172fb80fc289bcaa",
-      {
-        subject: user.id,
-        expiresIn: "1d",
-      }
-    );
+    const token = sign({ id: user.id, name, email }, process.env.JWT_SECRET, {
+      subject: user.id,
+      expiresIn: "1d",
+    });
 
     return {
       user,
