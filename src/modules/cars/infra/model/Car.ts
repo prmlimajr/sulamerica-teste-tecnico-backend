@@ -9,9 +9,10 @@ class Car {
   manufactureYear: number;
   category: string;
   mileage: number;
-  photoUrl?: string;
+  photo?: string;
   dailyRate: number;
   unavailableDates: string[];
+  isShowcase: boolean;
 
   constructor() {
     if (!this.id) {

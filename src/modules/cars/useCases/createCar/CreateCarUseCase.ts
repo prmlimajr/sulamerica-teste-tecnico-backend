@@ -13,7 +13,8 @@ interface IRequest {
   category: string;
   mileage: string;
   unavailableDates?: string[];
-  photoUrl: string;
+  photo: string;
+  isShowcase: boolean;
 }
 
 @injectable()
@@ -33,7 +34,8 @@ class CreateCarUseCase {
     category,
     mileage,
     unavailableDates = [],
-    photoUrl,
+    photo,
+    isShowcase,
   }: IRequest): Promise<Car[]> {
     const car = await this.carsRepository.create({
       name,
@@ -45,7 +47,8 @@ class CreateCarUseCase {
       category,
       mileage,
       unavailableDates,
-      photoUrl,
+      photo,
+      isShowcase,
     });
 
     return car;

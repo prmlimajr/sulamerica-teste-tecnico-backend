@@ -10,9 +10,10 @@ interface ICar {
   manufactureYear: number;
   category: string;
   mileage: number;
-  photoUrl?: string;
+  photo?: string;
   dailyRate: number;
   unavailableDates: string[];
+  isShowcase: boolean;
 }
 
 const carsSchema = new Schema<ICar>({
@@ -24,9 +25,10 @@ const carsSchema = new Schema<ICar>({
   manufactureYear: { type: Number, required: true },
   category: { type: String, required: true },
   mileage: { type: Number, required: true },
-  photoUrl: { type: String },
+  photo: { type: String },
   dailyRate: { type: Number, required: true },
   unavailableDates: { type: [String], required: true },
+  isShowcase: { type: Boolean, required: true, default: false },
 });
 
 const CarModel = model<ICar>("Car", carsSchema);

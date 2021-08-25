@@ -8,7 +8,8 @@ interface ICreateCarDTO {
   category: string;
   mileage: string;
   unavailableDates?: string[];
-  photoUrl: string;
+  photo: string;
+  isShowcase: boolean;
 }
 
 export { ICreateCarDTO };

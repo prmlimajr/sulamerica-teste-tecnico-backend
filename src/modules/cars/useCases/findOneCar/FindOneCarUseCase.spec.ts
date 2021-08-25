@@ -23,7 +23,8 @@ describe("Find a car by id", () => {
       model: 1968,
       category: "Hatch",
       mileage: "100000",
-      photoUrl: "teste",
+      photo: "teste",
+      isShowcase: false,
     };
 
     const [createdCar] = await createCarUseCase.execute({
@@ -35,7 +36,8 @@ describe("Find a car by id", () => {
       model: car.model,
       category: car.category,
       mileage: car.mileage,
-      photoUrl: car.photoUrl,
+      photo: car.photo,
+      isShowcase: car.isShowcase,
     });
 
     const [foundCar] = await findOneCarUseCase.execute(createdCar.id);

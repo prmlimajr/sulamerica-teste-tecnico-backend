@@ -49,8 +49,11 @@
                   "mileage": {
                     "type": "number"
                   },
-                  "photoUrl": {
+                  "photo": {
                     "type": "string"
+                  },
+                  "isShowcase":{
+                    "type": "boolean"
                   }
                 },
                 "example": {
@@ -62,7 +65,8 @@
                   "model": 2010,
                   "category": "Hatch",
                   "mileage": 10000,
-                  "photoUrl": "Imagem em base64"
+                  "photo": "Imagem em base64",
+                  "isShowcase": true
                 }
               }
             }
@@ -123,7 +127,7 @@
                       "mileage": {
                         "type": "number"
                       },
-                      "photoUrl": {
+                      "photo": {
                         "type": "string"
                       },
                       "unavailableDates": {
@@ -133,6 +137,9 @@
                           "format": "date",
                           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                         }
+                      },
+                      "isShowcase": {
+                        "type": "boolean"
                       }
                     }
                   }
@@ -199,7 +206,7 @@
                       "mileage": {
                         "type": "number"
                       },
-                      "photoUrl": {
+                      "photo": {
                         "type": "string"
                       },
                       "unavailableDates": {
@@ -209,6 +216,9 @@
                           "format": "date",
                           "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                         }
+                      },
+                      "isShowcase": {
+                        "type": "boolean"
                       }
                     }
                   }
@@ -388,8 +398,11 @@
                                 "mileage": {
                                   "type": "number"
                                 },
-                                "photoUrl": {
+                                "photo": {
                                   "type": "string"
+                                },
+                                "isShowcase": {
+                                  "type": "boolean"
                                 }
                               }
                             },

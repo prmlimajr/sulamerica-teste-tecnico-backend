@@ -18,7 +18,8 @@ class CarsRepository implements ICarsRepository {
     category,
     mileage,
     unavailableDates,
-    photoUrl,
+    photo,
+    isShowcase,
   }: ICreateCarDTO): Promise<Car[]> {
     const car = new CarModel({
       name,
@@ -30,7 +31,8 @@ class CarsRepository implements ICarsRepository {
       category,
       mileage,
       unavailableDates,
-      photoUrl,
+      photo,
+      isShowcase,
     });
 
     await car.save();
@@ -74,7 +76,7 @@ class CarsRepository implements ICarsRepository {
   async uploadPhoto(car: Car): Promise<void> {
     await CarModel.findOneAndUpdate(
       { id: car.id },
-      { photoUrl: car.photoUrl },
+      { photo: car.photo },
       { new: true }
     ).exec();
   }
